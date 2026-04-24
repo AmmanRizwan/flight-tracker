@@ -1,9 +1,9 @@
 import { Router } from "express";
 
-import { flightStreamV1 } from "../../controller/flight";
+import { flightStreamV2 } from "../../controller/flight";
 
 const router = Router();
 
-router.route("/").get(flightStreamV1);
+router.route("/").get(flightStreamV2);
 
 export default router;

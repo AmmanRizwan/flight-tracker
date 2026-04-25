@@ -1,11 +1,14 @@
+import "./style.scss";
 import L from "leaflet";
-import planSVG from "../../../assets/plane.svg";
+import planeIcon from "../../../assets/plane.png";
 
-const planIcon = new L.Icon({
-    iconUrl: planSVG,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-    popupAnchor: [0, -40]
-});
+const createPlaneIcon = (rotate: string) => {
+    return L.divIcon({
+        html: `<img src=${planeIcon} style="transform: rotate(${rotate}deg); width: 50px; height: 50px;" />`,
+        className: "plane-container",
+        iconSize: [50, 50],
+        iconAnchor: [20, 20]
+    })
+}
 
-export default planIcon;
+export default createPlaneIcon;

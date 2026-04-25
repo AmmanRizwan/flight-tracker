@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Map from "../../components/map";
 
 const FlightPage = () => {
     const API = import.meta.env.VITE_API_URL as string;
@@ -28,7 +29,9 @@ const FlightPage = () => {
     console.log(flight);
 
     return (
-        <div>Flight Page</div>
+        <div>
+            <Map />
+        </div>
     )
 }
 

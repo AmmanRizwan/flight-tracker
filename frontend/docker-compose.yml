@@ -1,0 +1,12 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+    pull_policy: always
+    container_name: frontend
+    ports:
+      - "3000:80"
+

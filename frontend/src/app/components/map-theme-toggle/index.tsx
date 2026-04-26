@@ -3,7 +3,7 @@ import "./style.scss";
 const MapThemeToggle = () => {
 
     return (
-        <div>
+        <div className="theme-toggle-btn">
             
         </div>
     )

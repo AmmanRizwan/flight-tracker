@@ -7,12 +7,19 @@ const getFlights = async () => {
     params.append('client_id', env.FLIGHT.CLIENT.ID);
     params.append('client_secret', env.FLIGHT.CLIENT.SECRET);
 
-    const token_data = await api.post(env.FLIGHT.TOKEN_API);
+    const token_data = await api.post(env.FLIGHT.TOKEN_API, params, {
+        headers: {
+            "Content-Type" : "application/x-www-form-urlencoded"
+        }
+    });
 
     if (token_data) {
         const token = token_data.data.access_token;
         const response = await api.get("/all", {
-            headers: {"Authorization": `Bearer ${token}`}
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Accept": 'application/json'
+            }
         });
         return response.data;
     }

@@ -19,3 +19,7 @@ Flight Tracker is a full-stack flight visualization platform that monitors live 
 - Backend: Node.js, Express
 
 - Data Protocol: Server-Sent Events (SSE)
+
+## Preview
+
+<img src="./preview/readme.png">

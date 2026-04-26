@@ -11,9 +11,16 @@
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
     
     & button {
         cursor: pointer;
-        transition: all 0.3s ease;
+    }
+}
+
+@media (max-width: 567px) {
+    .back-button {
+        width: 40px;
+        height: 40px;
     }
 }

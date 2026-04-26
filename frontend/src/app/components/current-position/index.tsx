@@ -1,10 +1,10 @@
-import { TbScanPosition } from "react-icons/tb";
 import "./style.scss";
 import { Tooltip } from "react-tooltip";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../../store";
 import { setPosition } from "../../../store/slice/location";
 import type { RefObject } from "react";
+import { GiPositionMarker } from "react-icons/gi";
 
 const CurrentPosition = ({mapRef}: {mapRef: RefObject<L.Map | null>}) => {
 
@@ -38,7 +38,7 @@ const CurrentPosition = ({mapRef}: {mapRef: RefObject<L.Map | null>}) => {
 
     return (
         <button className="current-location" id="current-location-id" onClick={handleLocation}>
-            <TbScanPosition size={30} />
+            <GiPositionMarker size={20} />
             <Tooltip 
                 anchorSelect="#current-location-id" 
                 place="top" 

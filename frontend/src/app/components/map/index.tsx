@@ -11,14 +11,6 @@ import { useSelector } from 'react-redux';
 import type { RootState } from '../../../store';
 
 const Map = () => {
-
-    const planes = [
-        [20.537, 78.029, "40", "Indian AIR", "India"], 
-        [20.503, 78.609, "120", "Special AIR", "India"], 
-        [20.337, 78.329, "320", "Unknown AIR", "India"], 
-        [20.597, 78.469, "10", "NO AIR", "India"]
-    ];
-
     const ATTR = import.meta.env.VITE_MAP_ATTRI;
     const URI = import.meta.env.VITE_MAP_URI;
     const API = import.meta.env.VITE_API_URL as string;
@@ -29,27 +21,25 @@ const Map = () => {
 
     const { position: currPos } = useSelector((state: RootState) => state.currentPosition);
 
-    console.log(currPos);
+    useEffect(() => {
+        const sse = new EventSource(`${API}/flight-stream`);
 
-    // useEffect(() => {
-    //     const sse = new EventSource(`${API}/flight-stream`);
+        sse.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            setFlight(data);
+            console.log("New flight data received");
+        }
 
-    //     sse.onmessage = (event) => {
-    //         const data = JSON.parse(event.data);
-    //         setFlight(data);
-    //         console.log("New flight data received");
-    //     }
+        sse.onerror = (error) => {
+            console.error("SSE Connection Error:", error);
+            sse.close();
+        }
 
-    //     sse.onerror = (error) => {
-    //         console.error("SSE Connection Error:", error);
-    //         sse.close();
-    //     }
+        return () => {
+            sse.close();
+        }
 
-    //     return () => {
-    //         sse.close();
-    //     }
-
-    // }, []);
+    }, []);
 
     return (
         <div className='map-body'>
@@ -85,18 +75,26 @@ const Map = () => {
                 )
             }
             {
-                planes.map((plane, index) => {
+                flight && flight.map((plane, index) => {
+                    const lat = plane[6];
+                    const lng = plane[5];
+
+                    if (typeof lat !== 'number' || typeof lng !== 'number') {
+                        return null;
+                    }
+
+                    const planPosition: LatLngExpression = [lat, lng];
                     return (
-                        <Marker key={index} position={[parseFloat(plane[0] as string), parseFloat(plane[1] as string)]} icon={createPlaneIcon(plane[2] as string)}>
+                            <Marker key={index} position={planPosition} icon={createPlaneIcon(plane[10] as string)}>
                             <Tooltip>
                                 <div>
                                     Plane Detail
                                 </div>
                                 <div>
-                                    Name: {plane[3]}
+                                    Name: {plane[1]}
                                 </div>
                                 <div>
-                                    Country: {plane[4]}
+                                    Country: {plane[2]}
                                 </div>
                             </Tooltip>
                         </Marker>

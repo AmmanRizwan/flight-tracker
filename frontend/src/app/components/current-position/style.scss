@@ -1,19 +1,19 @@
-.back-button {
+.current-location {
     border: none;
     width: 50px;
     height: 50px;
     position: absolute;
-    top: 20px;
+    bottom: 30px;
     right: 20px;
     background: white;
     z-index: 2000;
     padding: 10px 10px;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
-    
-    & button {
-        cursor: pointer;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+
+    &:hover {
+        background-color: #e2e2e2;
         transition: all 0.3s ease;
     }
 }

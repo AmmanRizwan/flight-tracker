@@ -4,6 +4,7 @@ import './style.scss';
 import type { LatLngExpression } from 'leaflet';
 import createPlaneIcon from '../plane-icon';
 import { useEffect, useState } from 'react';
+import CurrentPosition from '../current-position';
 import BackButton from '../back-button';
 
 const Map = () => {
@@ -44,6 +45,8 @@ const Map = () => {
 
     return (
         <div className='map-body'>
+
+            <CurrentPosition />
 
             <BackButton />
 

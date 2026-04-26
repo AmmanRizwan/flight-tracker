@@ -1,11 +1,14 @@
 import { MapContainer, Marker, Popup, TileLayer, Tooltip } from 'react-leaflet';
+import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
 import './style.scss';
 import type { LatLngExpression } from 'leaflet';
 import createPlaneIcon from '../plane-icon';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import CurrentPosition from '../current-position';
 import BackButton from '../back-button';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../../store';
 
 const Map = () => {
 
@@ -21,7 +24,12 @@ const Map = () => {
     const API = import.meta.env.VITE_API_URL as string;
     const position: LatLngExpression = [20.5930, 78.9629];
 
+    const mapRef = useRef<L.Map | null>(null);
     const [flight, setFlight] = useState([]);
+
+    const { position: currPos } = useSelector((state: RootState) => state.currentPosition);
+
+    console.log(currPos);
 
     // useEffect(() => {
     //     const sse = new EventSource(`${API}/flight-stream`);
@@ -46,25 +54,36 @@ const Map = () => {
     return (
         <div className='map-body'>
 
-            <CurrentPosition />
+            <CurrentPosition mapRef={mapRef} />
 
             <BackButton />
 
             <MapContainer 
                 center={position} 
-                zoom={13} 
+                zoom={5} 
                 scrollWheelZoom={false} 
                 className="map-container"
+                ref={mapRef}
                 >
             <TileLayer
                 attribution={ATTR}
                 url={URI}
             />
-            <Marker position={position}>
-                <Popup>
-                    Your are here Location
-                </Popup>
-            </Marker>
+            {
+                currPos === null ? (
+                    <Marker position={position}>
+                        <Popup>
+                            Your are here Location
+                        </Popup>
+                    </Marker>
+                ) : (
+                    <Marker position={currPos}>
+                        <Popup>
+                            Your are here Location
+                        </Popup>
+                    </Marker>
+                )
+            }
             {
                 planes.map((plane, index) => {
                     return (

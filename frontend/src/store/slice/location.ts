@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import type { LatLngExpression } from "leaflet";
 
 interface ICurrentPosition {
-    position: null | [];
+    position: null | LatLngExpression;
 }
 
 const initialState: ICurrentPosition = {

@@ -78,7 +78,7 @@ const Map = () => {
                 )
             }
             {
-                flight && flight.map((plane, index) => {
+                flight && flight.slice(0, 50).map((plane, index) => {
                     const lat = plane[6];
                     const lng = plane[5];
 

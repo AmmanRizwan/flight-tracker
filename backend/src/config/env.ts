@@ -9,7 +9,11 @@ const {
     CORS_METHODS,
     CORS_AGE,
     CORS_CREDENTIAL,
-    FLIGHT_API
+    FLIGHT_API,
+    FLIGHT_TOKEN_API,
+    CLIENT_ID,
+    CLIENT_SECRET,
+    CLIENT_GRANT_TYPE
 } = process.env;
 
 if (!PORT) {
@@ -40,6 +44,22 @@ if (!FLIGHT_API) {
     throw new Error("FLIGHT_API is not set");
 }
 
+if (!FLIGHT_TOKEN_API) {
+    throw new Error("FLIGHT_TOKEN_API is not set");
+}
+
+if (!CLIENT_ID) {
+    throw new Error("CLIENT_ID is not set");
+}
+
+if (!CLIENT_GRANT_TYPE) {
+    throw new Error("CLIENT_GRANT_TYPE is not set");
+}
+
+if (!CLIENT_SECRET) {
+    throw new Error("CLIENT_SECRET is not set");
+}
+
 const config = {
     PORT,
     ENV: NODE_ENV,
@@ -50,7 +70,13 @@ const config = {
         AGE: CORS_AGE
     },
     FLIGHT: {
-        API: FLIGHT_API
+        API: FLIGHT_API,
+        TOKEN_API: FLIGHT_TOKEN_API,
+        CLIENT: {
+            ID: CLIENT_ID,
+            SECRET: CLIENT_SECRET,
+            GRANT_TYPE: CLIENT_GRANT_TYPE,
+        }
     }
 }
 

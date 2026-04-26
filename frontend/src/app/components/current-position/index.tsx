@@ -10,8 +10,6 @@ const CurrentPosition = ({mapRef}: {mapRef: RefObject<L.Map | null>}) => {
 
     const dispatch = useDispatch();
     const { position } = useSelector((state: RootState) => state.currentPosition);
-    
-    console.log(position);
 
     const handleLocation = () => {
         if (!navigator.geolocation) {

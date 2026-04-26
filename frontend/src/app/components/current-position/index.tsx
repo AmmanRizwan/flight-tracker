@@ -5,6 +5,7 @@ import type { RootState } from "../../../store";
 import { setPosition } from "../../../store/slice/location";
 import type { RefObject } from "react";
 import { GiPositionMarker } from "react-icons/gi";
+import { toast } from "react-toastify";
 
 const CurrentPosition = ({mapRef}: {mapRef: RefObject<L.Map | null>}) => {
 
@@ -25,13 +26,14 @@ const CurrentPosition = ({mapRef}: {mapRef: RefObject<L.Map | null>}) => {
                             mapRef.current.locate();
                             mapRef.current?.flyTo(position, 14, { duration: 2 });
                         }
+                    }
+                },
+                (err) => {
+                    console.error(err);
+                    dispatch(setPosition(null));
                 }
-            },
-            (err) => {
-                console.error(err);
-                dispatch(setPosition(null));
-            }
-        )
+            )
+        toast.info("location is set");
     }
 
     return (

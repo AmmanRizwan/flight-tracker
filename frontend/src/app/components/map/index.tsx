@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import type { RootState } from '../../../store';
 import ThemeButton from '../theme-button';
 import MapThemeToggle from '../map-theme-toggle';
+import { ToastContainer } from 'react-toastify';
 
 const Map = () => {
     
@@ -52,6 +53,8 @@ const Map = () => {
             <ThemeButton />
 
             <CurrentPosition mapRef={mapRef} />
+
+            <ToastContainer />
 
             <BackButton />
 

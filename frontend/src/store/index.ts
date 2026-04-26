@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import currentPositionReducer from "./slice/location";
+import themeReducer from "./slice/theme";
 
 export const store = configureStore({
     reducer: {
-        currentPosition: currentPositionReducer
+        currentPosition: currentPositionReducer,
+        theme: themeReducer,
     }
 });
 

@@ -9,6 +9,7 @@ import CurrentPosition from '../current-position';
 import BackButton from '../back-button';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../../store';
+import ThemeButton from '../theme-button';
 
 const Map = () => {
     const ATTR = import.meta.env.VITE_MAP_ATTRI;
@@ -43,6 +44,8 @@ const Map = () => {
 
     return (
         <div className='map-body'>
+
+            <ThemeButton />
 
             <CurrentPosition mapRef={mapRef} />
 

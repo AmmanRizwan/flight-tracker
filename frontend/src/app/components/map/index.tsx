@@ -10,12 +10,14 @@ import BackButton from '../back-button';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../../store';
 import ThemeButton from '../theme-button';
+import MapThemeToggle from '../map-theme-toggle';
 
 const Map = () => {
+    
     const ATTR = import.meta.env.VITE_MAP_ATTRI;
-    const URI = import.meta.env.VITE_MAP_URI;
     const API = import.meta.env.VITE_API_URL as string;
     const position: LatLngExpression = [20.5930, 78.9629];
+    const { theme } = useSelector((state: RootState) => state.theme);
 
     const mapRef = useRef<L.Map | null>(null);
     const [flight, setFlight] = useState([]);
@@ -45,6 +47,8 @@ const Map = () => {
     return (
         <div className='map-body'>
 
+            <MapThemeToggle />
+
             <ThemeButton />
 
             <CurrentPosition mapRef={mapRef} />
@@ -60,7 +64,7 @@ const Map = () => {
                 >
             <TileLayer
                 attribution={ATTR}
-                url={URI}
+                url={theme}
             />
             {
                 currPos === null ? (
@@ -78,7 +82,7 @@ const Map = () => {
                 )
             }
             {
-                flight && flight.slice(0, 50).map((plane, index) => {
+                flight && flight.slice(0, 100).map((plane, index) => {
                     const lat = plane[6];
                     const lng = plane[5];
 

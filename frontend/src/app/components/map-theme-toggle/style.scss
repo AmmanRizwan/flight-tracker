@@ -1,0 +1,71 @@
+.theme-toggle-btn {
+    position: absolute;
+    bottom: 40px;
+    left: 10px;
+    z-index: 2000;
+    transition: all 0.5s ease-in-out;
+
+    & button {
+        width: 40px;
+        height: 40px;
+        border: none;
+        padding: 10px 10px;
+        border-radius: 50%;
+        background-color: white;
+        cursor: pointer;
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+        transition: all 0.5s ease-in-out;
+    }
+
+    & .normal-btn {
+        position: absolute;
+        bottom: 40px;
+        left: 20px;
+    }
+
+    & .dark-btn {
+        position: absolute;
+        bottom: 30px;
+        left: 75px;
+    }
+
+    & .gray-btn {
+        position: absolute;
+        bottom: -20px;
+        left: 80px;
+    }
+}
+
+.hide-toggle-btn {
+    display: none;
+    transition: all 0.5s ease-in-out;
+}
+
+@media (max-width: 567px) {
+    .theme-toggle-btn {
+
+        & button {
+            width: 30px;
+            height: 30px;
+            padding: 0px 0px;
+        }
+
+        & .normal-btn {
+        position: absolute;
+        bottom: 30px;
+        left: 20px;
+        }
+
+        & .dark-btn {
+            position: absolute;
+            bottom: 15px;
+            left: 56px;
+        }
+
+        & .gray-btn {
+            position: absolute;
+            bottom: -20px;
+            left: 67px;
+        }
+    }
+}

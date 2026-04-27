@@ -7,6 +7,16 @@ on:
       - '/backend/**'
       - '/frontend/**'
 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to run against"
+        required: true
+        type: choice
+        default: 'staging'
+        options:
+          - 'staging'
+
 jobs:
   build:
     runs-on: ubuntu-latest

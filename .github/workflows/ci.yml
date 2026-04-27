@@ -15,7 +15,7 @@ on:
         type: choice
         default: 'staging'
         options:
-          - 'staging'
+          - 'development'
 
 jobs:
   build:
@@ -25,17 +25,8 @@ jobs:
       contents: read
       packages: write
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x, 24x]
-
     steps:
     - uses: actions/checkout@v4
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
 
     - name: Enable Corepack
       run: |

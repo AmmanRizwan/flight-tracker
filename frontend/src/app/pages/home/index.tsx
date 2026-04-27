@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 
 const Home = () => {
     const navigate = useNavigate();

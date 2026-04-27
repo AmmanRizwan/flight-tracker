@@ -1,0 +1,58 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'node-20'
+    }
+
+    stages {
+        stage("Clean Up") {
+            steps {
+                echo "Cleaning workspace..."
+                deleteDir()
+                checkout scm
+            }
+        }
+
+        stage("Install Dependencies") {
+            steps {
+                echo "Installing yarn packages..."
+                sh 'corepack enable'
+                sh 'yarn install'
+            }
+        }
+
+        stage("Test") {
+            steps {
+                echo "Running unit tests..."
+                sh 'yarn test'
+            }
+        }
+
+        stage("Build") {
+            steps {
+                echo "Building application..."
+                sh "yarn build"
+            }
+        }
+
+        // stage("Docker Image") {
+        //     steps {
+        //         echo "Building Docker image..."
+        //         sh 'sudo docker build -t frontend-app:0.1 .'
+        //     }
+        // }
+    }
+
+    post {
+        always {
+            echo "Pipeline finished. Cleaning up..."
+        }
+        success {
+            echo "Deployment successfully!"
+        }
+        failure {
+            echo "Pipeline failed. Check the logs above"
+        }
+    }
+}

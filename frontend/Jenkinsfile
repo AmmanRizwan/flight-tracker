@@ -16,37 +16,46 @@ pipeline {
 
         stage("Install Dependencies") {
             steps {
-                echo "Installing yarn packages..."
-                sh 'corepack enable'
-                sh 'yarn install'
+                dir("frontend") {
+                    echo "Installing yarn packages..."
+                    sh 'corepack enable'
+                    sh 'yarn install'
+                }
             }
         }
 
         stage("Lint & Security Scan") {
             stages {
-                echo "Checking code quality..."
-                sh 'yarn lint'
+                dir("frontend") {
+                    echo "Checking code quality..."
+                    sh 'yarn lint'
+                }
             }
         }
 
         stage("Test") {
             steps {
-                echo "Running unit tests..."
-                sh 'yarn test'
+                dir("frontend") {
+                    echo "Running unit tests..."
+                    sh 'yarn test'
+                }
             }
         }
 
         stage("Build") {
             steps {
-                echo "Building application..."
-                sh "yarn build"
+                dir("frontend") {
+                    echo "Building application..."
+                    sh "yarn build"
+                }
             }
         }
 
         // stage("Docker Image") {
         //     steps {
         //         echo "Building Docker image..."
-        //         sh 'sudo docker build -t frontend-app:0.1 .'
+        //         sh 'sudo docker build -t frontend .'
+        //         sh 'sudo docker rmi frontend'
         //     }
         // }
     }

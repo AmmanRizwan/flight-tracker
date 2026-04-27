@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { LatLngExpression } from "leaflet";
 
 interface ICurrentPosition {
-    position: null | LatLngExpression;
+    position: LatLngExpression;
 }
 
 const initialState: ICurrentPosition = {
-    position: null
+    position: [20.5930, 78.9629]
 };
 
 export const currentPositionSlice = createSlice({

@@ -1,39 +1,37 @@
 import "./style.scss";
 import { Tooltip } from "react-tooltip";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../../store";
+import { useDispatch } from "react-redux";
 import { setPosition } from "../../../store/slice/location";
 import type { RefObject } from "react";
 import { GiPositionMarker } from "react-icons/gi";
-import { toast } from "react-toastify";
 
 const CurrentPosition = ({mapRef}: {mapRef: RefObject<L.Map | null>}) => {
 
     const dispatch = useDispatch();
-    const { position } = useSelector((state: RootState) => state.currentPosition);
 
-    const handleLocation = () => {
-        if (!navigator.geolocation) {
-            dispatch(setPosition(null));
-            return;
+    const getCoords = (): Promise<[number, number]> => {
+        return new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition((position) => {
+                resolve([position.coords.latitude, position.coords.longitude])
+            },
+        (error: GeolocationPositionError) => {
+            reject(error);
+        });
+        })
+    }
+
+    const handleLocation = async () => {
+        try {
+            const pos = await getCoords();
+            dispatch(setPosition(pos));
+            if (mapRef.current) {
+                mapRef.current?.flyTo(pos, 14, { duration: 6 });
+            }
         }
-
-        navigator.geolocation.getCurrentPosition(
-            (pos) => {
-                if (mapRef.current) {
-                    dispatch(setPosition([pos.coords.latitude, pos.coords.longitude]));
-                    if (position !== null) {
-                            mapRef.current.locate();
-                            mapRef.current?.flyTo(position, 14, { duration: 2 });
-                        }
-                    }
-                },
-                (err) => {
-                    console.error(err);
-                    dispatch(setPosition(null));
-                }
-            )
-        toast.info("location is set");
+        catch (err) {
+            console.error(err);
+        }
+        
     }
 
     return (

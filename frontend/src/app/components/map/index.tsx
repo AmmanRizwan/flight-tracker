@@ -16,13 +16,12 @@ const Map = () => {
     
     const ATTR = import.meta.env.VITE_MAP_ATTRI;
     const API = import.meta.env.VITE_API_URL as string;
-    const position: LatLngExpression = [20.5930, 78.9629];
     const { theme } = useSelector((state: RootState) => state.theme);
 
     const mapRef = useRef<L.Map | null>(null);
     const [flight, setFlight] = useState([]);
 
-    const { position: currPos } = useSelector((state: RootState) => state.currentPosition);
+    const { position } = useSelector((state: RootState) => state.currentPosition);
 
     useEffect(() => {
         const sse = new EventSource(`${API}/flight-stream`);
@@ -66,21 +65,11 @@ const Map = () => {
                 attribution={ATTR}
                 url={theme}
             />
-            {
-                currPos === null ? (
-                    <Marker position={position}>
-                        <Popup>
-                            Your are here Location
-                        </Popup>
-                    </Marker>
-                ) : (
-                    <Marker position={currPos}>
-                        <Popup>
-                            Your are here Location
-                        </Popup>
-                    </Marker>
-                )
-            }
+            <Marker position={position}>
+                <Popup>
+                    Your are here Location
+                </Popup>
+            </Marker>
             {
                 flight && flight.slice(0, 100).map((plane, index) => {
                     const lat = plane[6];

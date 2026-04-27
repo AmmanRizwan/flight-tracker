@@ -24,6 +24,7 @@ pipeline {
 
         stage("Test") {
             steps {
+                dir("backend")
                 echo "Running unit tests..."
                 sh 'yarn test'
             }
@@ -31,6 +32,7 @@ pipeline {
 
         stage("Build") {
             steps {
+                dir("backend")
                 echo "Building application..."
                 sh "yarn build"
             }
@@ -39,7 +41,8 @@ pipeline {
         // stage("Docker Image") {
         //     steps {
         //         echo "Building Docker image..."
-        //         sh 'sudo docker build -t frontend-app:0.1 .'
+        //         sh 'sudo docker build -t backend .'
+        //         sh 'sudo docker rmi backend'
         //     }
         // }
     }

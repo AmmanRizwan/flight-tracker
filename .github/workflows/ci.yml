@@ -59,7 +59,7 @@ jobs:
 
     - name: Running Test in Backend
       run: yarn test
-      working-directory: .backend
+      working-directory: ./backend
     
     - name: Running Test in Frontend
       run: yarn test

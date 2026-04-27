@@ -5,6 +5,7 @@ import { PiMapTrifoldFill } from "react-icons/pi";
 import { RiRoadMapFill } from "react-icons/ri";
 import { FaMapMarked } from "react-icons/fa";
 import { darkTheme, normalTheme, grayTheme } from "../../../store/slice/theme";
+import { Tooltip } from "react-tooltip";
 
 const MapThemeToggle = () => {
 
@@ -25,14 +26,29 @@ const MapThemeToggle = () => {
 
     return (
         <div className={`theme-toggle-btn ${toggle ? "" : "hide-toggle-btn"}`}>
-            <button className="normal-btn" onClick={handleNormalTheme}>
+            <button className="normal-btn" id="normal-theme" onClick={handleNormalTheme}>
                 <FaMapMarked size={20} />
+                <Tooltip 
+                    anchorSelect="#normal-theme"
+                    content="Caro"
+                    place="top"
+                />
             </button>
-            <button className="dark-btn" onClick={handleDarkTheme}>
+            <button className="dark-btn" id="dark-theme" onClick={handleDarkTheme}>
                 <PiMapTrifoldFill size={20} />
+                <Tooltip
+                    anchorSelect="#dark-theme"
+                    content="Dark All"
+                    place="right"
+                />
             </button>
-            <button className="gray-btn" onClick={handleGrayTheme}>
+            <button className="gray-btn" id="gray-theme" onClick={handleGrayTheme}>
                 <RiRoadMapFill size={20} />
+                <Tooltip
+                    anchorSelect="#gray-theme"
+                    content="Alidade Smooth Dark"
+                    place="left"
+                />
             </button>
         </div>
     )

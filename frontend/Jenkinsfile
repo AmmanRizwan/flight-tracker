@@ -51,13 +51,15 @@ pipeline {
             }
         }
 
-        // stage("Docker Image") {
-        //     steps {
-        //         echo "Building Docker image..."
-        //         sh 'sudo docker build -t frontend .'
-        //         sh 'sudo docker rmi frontend'
-        //     }
-        // }
+        stage("Docker Image") {
+            steps {
+                dir("frontend") {
+                    echo "Building Docker image..."
+                    sh 'sudo docker build -t frontend .'
+                    sh 'sudo docker rmi frontend'
+                }
+            }
+        }
     }
 
     post {

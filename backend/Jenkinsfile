@@ -42,13 +42,15 @@ pipeline {
             }
         }
 
-        // stage("Docker Image") {
-        //     steps {
-        //         echo "Building Docker image..."
-        //         sh 'sudo docker build -t backend .'
-        //         sh 'sudo docker rmi backend'
-        //     }
-        // }
+        stage("Docker Image") {
+            steps {
+                dir("backend") {
+                    echo "Building Docker image..."
+                    sh 'docker build -t backend .'
+                    sh 'docker rmi backend'
+                }
+            }
+        }
     }
 
     post {

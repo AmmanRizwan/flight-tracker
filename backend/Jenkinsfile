@@ -16,6 +16,7 @@ pipeline {
 
         stage("Install Dependencies") {
             steps {
+                dir("backend")
                 echo "Installing yarn packages..."
                 sh 'corepack enable'
                 sh 'yarn install'
@@ -24,6 +25,7 @@ pipeline {
 
         stage("Test") {
             steps {
+                dir("backend")
                 echo "Running unit tests..."
                 sh 'yarn test'
             }
@@ -31,6 +33,7 @@ pipeline {
 
         stage("Build") {
             steps {
+                dir("backend")
                 echo "Building application..."
                 sh "yarn build"
             }

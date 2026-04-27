@@ -1,22 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { Bounce, toast } from "react-toastify";
 
 const Home = () => {
     const navigate = useNavigate();
 
     const handleNavigateToFlight = () => {
         navigate("/flight");
-        toast.success('🦄 Wow so easy!', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            transition: Bounce,
-            });
     }
 
     return (

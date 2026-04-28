@@ -7,10 +7,11 @@ const getFlights = async () => {
     params.append('client_id', env.FLIGHT.CLIENT.ID);
     params.append('client_secret', env.FLIGHT.CLIENT.SECRET);
 
-    const token_data = await api.post(env.FLIGHT.TOKEN_API, params, {
+    const token_data = await api.post(env.FLIGHT.TOKEN_API as string, params, {
         headers: {
             "Content-Type" : "application/x-www-form-urlencoded"
-        }
+        },
+        family: 4,
     });
 
     if (token_data) {
@@ -21,6 +22,9 @@ const getFlights = async () => {
                 "Accept": 'application/json'
             }
         });
+        return response.data;
+    } else {
+        const response = await api.get("/all");
         return response.data;
     }
 }

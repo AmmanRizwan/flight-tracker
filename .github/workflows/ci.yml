@@ -2,7 +2,9 @@ name: Flight Tracker CI
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+    types: [closed]
     paths:
       - '/backend/**'
       - '/frontend/**'

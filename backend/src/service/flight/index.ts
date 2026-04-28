@@ -1,4 +1,3 @@
-import api from "../api";
 import env from "../../config/env";
 
 const getFlights = async () => {
@@ -7,25 +6,38 @@ const getFlights = async () => {
     params.append('client_id', env.FLIGHT.CLIENT.ID);
     params.append('client_secret', env.FLIGHT.CLIENT.SECRET);
 
-    const token_data = await api.post(env.FLIGHT.TOKEN_API as string, params, {
-        headers: {
-            "Content-Type" : "application/x-www-form-urlencoded"
-        },
-        family: 4,
-    });
-
-    if (token_data) {
-        const token = token_data.data.access_token;
-        const response = await api.get("/all", {
+    try {
+        const token_data = await fetch(env.FLIGHT.TOKEN_API as string, {
+            method: "POST",
             headers: {
-                "Authorization": `Bearer ${token}`,
-                "Accept": 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json'
+            },
+            body: params
+        })
+
+        if (!token_data.ok) {
+            throw new Error(`'HTTPS error' status: ${token_data.status}`);
+        }
+
+        const data = await token_data.json();
+
+        if (data) {
+            const token = data.access_token; 
+            const response = await fetch(`${env.FLIGHT.API}/all`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Accept": 'application/json'
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`HTTPS error status: ${response.status}` );
             }
-        });
-        return response.data;
-    } else {
-        const response = await api.get("/all");
-        return response.data;
+            return response.json();
+        }
+    }
+    catch (err) {
+        console.error("fetching error:", err);
     }
 }
 

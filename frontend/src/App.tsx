@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route element={<Home />} path="/" />
-      <Route element={<FlightPage />} path="/flight" />
+      <Route element={<FlightPage />} path="/open-playground" />
     </Routes>
     </BrowserRouter>
   )

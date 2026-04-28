@@ -13,7 +13,9 @@ const {
     FLIGHT_TOKEN_API,
     CLIENT_ID,
     CLIENT_SECRET,
-    CLIENT_GRANT_TYPE
+    CLIENT_GRANT_TYPE,
+    CLIENT_USER,
+    CLIENT_PASS
 } = process.env;
 
 if (!PORT) {
@@ -60,6 +62,14 @@ if (!CLIENT_SECRET) {
     throw new Error("CLIENT_SECRET is not set");
 }
 
+if (!CLIENT_USER) {
+    throw new Error("CLIENT_USER is not set");
+}
+
+if (!CLIENT_PASS) {
+    throw new Error("CLIENT_PASS is not set");
+}
+
 const config = {
     PORT,
     ENV: NODE_ENV,
@@ -76,7 +86,9 @@ const config = {
             ID: CLIENT_ID,
             SECRET: CLIENT_SECRET,
             GRANT_TYPE: CLIENT_GRANT_TYPE,
-        }
+        },
+        USER: CLIENT_USER,
+        PASS: CLIENT_PASS
     }
 }
 

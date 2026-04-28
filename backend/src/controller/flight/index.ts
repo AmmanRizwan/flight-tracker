@@ -7,28 +7,6 @@ interface IFlightData {
     states: any[][]
 }
 
-const flightStreamV3 = async (req: Request, res: Response) => {
-    try {
-        const fetch = async () => {
-            try {
-                const flights: IFlightData = await getFlights();
-                const data = flights.states;
-                res.status(200).json(data);
-            }
-            catch (err: any) {
-                console.log(err);
-            }
-
-            fetch();
-            const intervalId = setInterval(await fetch, 15000);
-            req.on('close', () => clearInterval(intervalId));
-        }
-    }
-    catch (err) {
-        console.log("Server error:", err);
-    }
-}
-
 const flightStreamV2 = async (req: Request, res: Response, next: NextFunction) => {
     try {
         res.setHeader("Content-Type", "text/event-stream");
@@ -92,5 +70,4 @@ const flightStreamV1 = async (req: Request, res: Response, next: NextFunction) =
 export {
     flightStreamV1,
     flightStreamV2,
-    flightStreamV3
 }

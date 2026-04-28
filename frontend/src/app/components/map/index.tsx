@@ -30,11 +30,9 @@ const Map = () => {
         sse.onmessage = (event) => {
             const data = JSON.parse(event.data);
             setFlight(data);
-            console.log("New flight data received");
         }
 
-        sse.onerror = (error) => {
-            console.error("SSE Connection Error:", error);
+        sse.onerror = () => {
             sse.close();
         }
 

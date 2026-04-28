@@ -18,11 +18,9 @@ const flightStreamV2 = async (req: Request, res: Response, next: NextFunction) =
                 const flights: IFlightData = await getFlights();
                 const data = flights.states;
                 logger.info("API is fetching from the server");
-                console.log("API is calling!!!");
                 res.write(`data: ${JSON.stringify(data)}\n\n`);
             }
             catch (err: any) {
-                console.error("Fetch Error:",err);
                 logger.warn("Fetching Error:", err?.message);
             }
         }
@@ -34,7 +32,6 @@ const flightStreamV2 = async (req: Request, res: Response, next: NextFunction) =
     }
     catch (err: any) {
         // next(err);
-        console.error("Fetch Error:", err);
         logger.warn(`Fetching Error: ${err.message}`)
     }
 }
@@ -50,7 +47,6 @@ const flightStreamV1 = async (req: Request, res: Response, next: NextFunction) =
             try {
                 const flights: IFlightData = await getFlights();
                 const data = flights.states;
-                console.log("API is calling!!!");
                 res.write(`data: ${JSON.stringify(data)}\n\n`);
             }
             catch (err) {

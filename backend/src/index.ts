@@ -23,6 +23,15 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/test-fetch', async (req, res) => {
+  try {
+    const result = await fetch('https://httpbin.org/get');
+    res.json({ success: result.ok });
+  } catch (err) {
+    res.json({ error: String(err) });
+  }
+});
+
 app.get("/", (_req: Request, res: Response) => {
     res.status(200).json({ message: "Server is ready!" });
 })

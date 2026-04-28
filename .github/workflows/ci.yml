@@ -1,6 +1,13 @@
 name: Flight Tracker CI
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - '/backend/**'
+      - '/frontend/**'
+
   pull_request:
     branches:
       - main

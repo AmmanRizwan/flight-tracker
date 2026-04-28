@@ -12,6 +12,7 @@ import type { RootState } from '../../../store';
 import ThemeButton from '../theme-button';
 import MapThemeToggle from '../map-theme-toggle';
 import PlaneDetail from '../plane-detail';
+import { customMarkerIcon } from '../custom-marker';
 
 const Map = () => {
     
@@ -64,7 +65,7 @@ const Map = () => {
                 attribution={ATTR}
                 url={theme}
             />
-            <Marker position={position}>
+            <Marker position={position} icon={customMarkerIcon}>
                 <Popup>
                     Your are here Location
                 </Popup>

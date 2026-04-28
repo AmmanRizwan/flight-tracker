@@ -7,6 +7,12 @@ import { GiPositionMarker } from "react-icons/gi";
 
 const CurrentPosition = ({mapRef}: {mapRef: RefObject<L.Map | null>}) => {
 
+    const options = {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+    }
+
     const dispatch = useDispatch();
 
     const getCoords = (): Promise<[number, number]> => {
@@ -16,7 +22,9 @@ const CurrentPosition = ({mapRef}: {mapRef: RefObject<L.Map | null>}) => {
             },
         (error: GeolocationPositionError) => {
             reject(error);
-        });
+        },
+        options
+    );
         })
     }
 

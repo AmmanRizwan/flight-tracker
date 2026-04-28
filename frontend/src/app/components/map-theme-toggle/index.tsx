@@ -38,7 +38,7 @@ const MapThemeToggle = () => {
                 <PiMapTrifoldFill size={20} />
                 <Tooltip
                     anchorSelect="#dark-theme"
-                    content="Dark All"
+                    content="Humanitarian"
                     place="right"
                 />
             </button>
@@ -46,7 +46,7 @@ const MapThemeToggle = () => {
                 <RiRoadMapFill size={20} />
                 <Tooltip
                     anchorSelect="#gray-theme"
-                    content="Alidade Smooth Dark"
+                    content="Esri World Imagery"
                     place="left"
                 />
             </button>

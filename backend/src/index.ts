@@ -21,7 +21,7 @@ app.use(cors({
     maxAge: parseInt(env.CORS.AGE as string)
 }))
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (_req: Request, res: Response) => {
     res.status(200).json({ message: "Server is ready!" });

@@ -23,6 +23,7 @@ const flightStreamV2 = async (req: Request, res: Response, next: NextFunction) =
                 res.write(`data: ${JSON.stringify(data)}\n\n`);
             }
             catch (err: any) {
+                console.log(err);
                 logger.warn("Fetching Error:", err);
             }
         }
@@ -34,6 +35,7 @@ const flightStreamV2 = async (req: Request, res: Response, next: NextFunction) =
     }
     catch (err: any) {
         // next(err);
+        console.log(err);
         logger.warn(`Fetching Error: ${err}`)
     }
 }

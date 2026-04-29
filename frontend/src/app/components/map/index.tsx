@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import CurrentPosition from '../current-position';
 import BackButton from '../back-button';
 import { useSelector } from 'react-redux';
-import type { RootState } from '../../../store';
+import type { RootState } from '../../store';
 import ThemeButton from '../theme-button';
 import MapThemeToggle from '../map-theme-toggle';
 import PlaneDetail from '../plane-detail';

@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./style.scss";
-import type { RootState } from "../../../store";
+import type { RootState } from "../../store";
 import { PiMapTrifoldFill } from "react-icons/pi";
 import { RiRoadMapFill } from "react-icons/ri";
 import { FaMapMarked } from "react-icons/fa";
-import { darkTheme, normalTheme, grayTheme } from "../../../store/slice/theme";
+import { darkTheme, normalTheme, grayTheme } from "../../store/slice/theme";
 import { Tooltip } from "react-tooltip";
 
 const MapThemeToggle = () => {

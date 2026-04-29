@@ -1,7 +1,7 @@
 import "./style.scss";
 import { Tooltip } from "react-tooltip";
 import { useDispatch } from "react-redux";
-import { setPosition } from "../../../store/slice/location";
+import { setPosition } from "../../store/slice/location";
 import type { RefObject } from "react";
 import { GiPositionMarker } from "react-icons/gi";
 

@@ -2,8 +2,8 @@ import { Tooltip } from "react-tooltip";
 import "./style.scss";
 import { BsMap, BsMapFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleOption } from "../../../store/slice/theme";
-import type { RootState } from "../../../store";
+import { toggleOption } from "../../store/slice/theme";
+import type { RootState } from "../../store";
 
 const ThemeButton = () => {
 

@@ -3,8 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "dist/main.js",
   "scripts": {
     "dev": "vite",
+    "electron": "tsc --project src/electron/tsconfig.json && electron .",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",

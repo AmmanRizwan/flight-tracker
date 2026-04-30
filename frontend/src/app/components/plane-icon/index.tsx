@@ -1,6 +1,6 @@
 import "./style.scss";
 import L from "leaflet";
-import planeIcon from "../../../assets/plane.png";
+import planeIcon from "../../assets/plane.png";
 
 const createPlaneIcon = (rotate: string) => {
     return L.divIcon({

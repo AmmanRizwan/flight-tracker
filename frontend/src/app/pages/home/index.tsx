@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import PlaneBackground from "../../../assets/flight-background.jpg";
+import PlaneBackground from "../../assets/flight-background.jpg";
 import "./home.scss";
 import type { IFeatureCard } from "../../interface";
 import FeatureCard from "../../components/feature-card";

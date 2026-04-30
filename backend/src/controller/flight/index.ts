@@ -28,7 +28,7 @@ const flightStreamV2 = async (req: Request, res: Response, next: NextFunction) =
         }
 
         fetch();
-        const intervalId = setInterval(await fetch, 15000);
+        const intervalId = setInterval(await fetch, 5000);
 
         req.on('close', () => clearInterval(intervalId));
     }

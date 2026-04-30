@@ -2,6 +2,6 @@ import { app, BrowserWindow } from "electron";
 import path from "path";
 
 app.on("ready", () => {
-    const mainWindow = new BrowserWindow({});
-    mainWindow.loadFile(path.join(app.getAppPath(), "/build/index.html"));
+    const win = new BrowserWindow({});
+    win.loadFile(path.join(app.getAppPath(), "/build/index.html"));
 })

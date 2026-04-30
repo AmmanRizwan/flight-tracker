@@ -1,5 +1,6 @@
 {
   "name": "backend",
+  "author": "Amman Rizwan",
   "packageManager": "yarn@4.10.3",
   "scripts": {
     "test": "echo \"No Test\"",

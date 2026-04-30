@@ -1,0 +1,15 @@
+{
+    "appId": "com.ar.flight_tracker",
+    "files": ["dist", "build"],
+    "icon": "./icon.png",
+    "mac": {
+        "target": "dmg"
+    },
+    "linux": {
+        "target": "AppImage",
+        "category": "Utility"
+    },
+    "win": {
+        "target": ["portable", "msi"]
+    }
+}

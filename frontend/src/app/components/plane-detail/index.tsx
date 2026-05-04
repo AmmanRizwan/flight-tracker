@@ -1,4 +1,6 @@
-const PlaneDetail = ({plane}: {
+import type { RefObject } from "react";
+
+const PlaneDetail = ({plane, mapRef}: {
     plane: [
         string, string, string,
         number, number, number, number, number,
@@ -9,10 +11,23 @@ const PlaneDetail = ({plane}: {
         null | number | string,
         boolean,
         number
-    ]
+    ],
+    mapRef: RefObject<L.Map | null>
 }) => {
+
+    const handleLocationFlight = (lat: number, lng: number) => {
+        try {
+            if (mapRef.current) {
+                mapRef.current?.flyTo([lat, lng], 14, { duration: 6});
+            }
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }
+
     return (
-        <div style={{ minWidth: '150px' }}>
+        <div style={{ minWidth: '150px' }} onClick={() => handleLocationFlight(plane[6], plane[5])}>
             <div style={{ borderBottom: '1px solid #ccc', marginBottom: '5px', paddingBottom: '2px' }}>
                 <strong>{plane[1] || 'Unknown Callsign'}</strong> 
                 <span style={{ fontSize: '0.8em', color: '#666', marginLeft: '8px' }}>({plane[0]})</span>

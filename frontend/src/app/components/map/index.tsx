@@ -86,7 +86,7 @@ const Map = () => {
                                 position={planPosition} 
                                 icon={createPlaneIcon(plane[10] as string)}>
                             <Tooltip>
-                                <PlaneDetail plane={plane} />
+                                <PlaneDetail mapRef={mapRef} plane={plane} />
                             </Tooltip>
                         </Marker>
                     )

@@ -84,9 +84,18 @@ const Map = () => {
                             <Marker 
                                 key={index} 
                                 position={planPosition} 
-                                icon={createPlaneIcon(plane[10] as string)}>
+                                icon={createPlaneIcon(plane[10] as string)}
+                                eventHandlers={{
+                                    click: () => {
+                                        const map = mapRef.current;
+                                        if (map) {
+                                            map.flyTo(planPosition, 14, { duration: 4 })
+                                        }
+                                    }
+                                }}
+                            >
                             <Tooltip>
-                                <PlaneDetail mapRef={mapRef} plane={plane} />
+                                <PlaneDetail plane={plane} />
                             </Tooltip>
                         </Marker>
                     )

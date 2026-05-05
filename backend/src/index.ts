@@ -23,28 +23,6 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/test-fetch', async (req, res) => {
-  try {
-    const result = await fetch('https://httpbin.org/get');
-    res.json({ success: result.ok });
-  } catch (err) {
-    res.json({ error: String(err) });
-  }
-});
-
-app.get("/flight", async (req, res) => {
-  try {
-    const response = await fetch(`${env.FLIGHT.API}/all`, { headers: {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}});
-
-    const data = await response.json();
-
-    res.json(data);
-  }
-  catch (err) {
-    res.status(500).json({ error: "Failed to fetch"});
-  }
-})
-
 app.get("/", (_req: Request, res: Response) => {
     res.status(200).json({ message: "Server is ready!" });
 })

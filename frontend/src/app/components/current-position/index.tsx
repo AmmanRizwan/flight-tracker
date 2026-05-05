@@ -7,33 +7,20 @@ import { GiPositionMarker } from "react-icons/gi";
 
 const CurrentPosition = ({mapRef}: {mapRef: RefObject<L.Map | null>}) => {
 
-    const options = {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 0
-    }
-
     const dispatch = useDispatch();
-
-    const getCoords = (): Promise<[number, number]> => {
-        return new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition((position) => {
-                resolve([position.coords.latitude, position.coords.longitude])
-            },
-        (error: GeolocationPositionError) => {
-            reject(error);
-        },
-        options
-    );
-        })
-    }
 
     const handleLocation = async () => {
         try {
-            const pos = await getCoords();
-            dispatch(setPosition(pos));
             if (mapRef.current) {
-                mapRef.current?.flyTo(pos, 14, { duration: 6 });
+                mapRef.current.once("locationfound", (e) => {
+                    const { lat, lng } = e.latlng;
+                    dispatch(setPosition([lat, lng]));
+                    mapRef.current?.flyTo([lat, lng], 14, { duration: 6 });
+                })
+                mapRef.current.once("locationerror", () => {
+                    alert("Location Access denied.");
+                })
+                mapRef.current.locate({ setView: false });
             }
         }
         catch (err) {

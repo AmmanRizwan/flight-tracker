@@ -12,6 +12,16 @@ Flight Tracker is a full-stack flight visualization platform that monitors live 
 
 - Efficient State Management: Handles frequent UI re-renders using optimized React hooks to ensure a stutter-free mapping experience even with 1,000+ active markers.
 
+## Improvement of Flight Detail
+
+If your device handle the load of the flight track detail more than 100 then update the following line:
+
+```tsx
+// Go to the line no. 74
+// remove the `flight.slice(0, 100)`
+flight && flight.map((plane, index))
+```
+
 ## Built with
 
 The list of major framework/libraries used to bootstrap this project.
@@ -33,6 +43,233 @@ The list of major framework/libraries used to bootstrap this project.
 - Backend: Node.js, Express
 
 - Data Protocol: Server-Sent Events (SSE)
+
+## Getting Started / Installation
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **Node.js** (v18 or higher)
+- **Yarn** (v4.10.3 or higher)
+- **Git**
+
+### Installation Steps
+
+#### 1. Clone the Repository
+
+```bash
+git clone https://github.com/AmmanRizwan/flight-tracker.git
+cd flight-tracker
+```
+
+#### 2. Backend Setup
+```bash
+# Naviagte the backend directory
+cd backend
+
+# enable corepack globally
+corepack enable
+
+# set the version
+corepack use yarn@4.10.3
+
+# Install dependencies
+yarn install
+
+# Create environment file 
+cp .env.example .env
+
+# Start development server
+yarn dev
+```
+
+#### 3. Frontend Setup
+
+```bash
+# Navigate to frontend directory (from root)
+cd frontend
+
+# enable corepack globally
+corepack enable
+
+# set the version
+corepack use yarn@4.10.3
+
+# Install dependencies
+yarn install
+
+# Create environment file
+cp .env.example .env
+
+# Configure your .env file 
+# VITE_API_URL=http://localhost:8000/v1/api
+
+# Start development server
+yarn dev
+```
+
+### Running the Application
+
+#### 1. Start Backend Server:
+
+```bash
+cd backend
+yarn dev
+```
+Backend will run on `http://localhost:8000`
+
+#### 2. Start Frontend Server:
+
+```bash
+cd frontend
+yarn dev
+```
+Frontend will run on `http://localhost:5173`
+
+4. **Access the Application**: Open your browser and navigate to `http://localhost:5713`
+
+### Important Notes
+
+- **Do not commit** `.env` files or expose sensitive credentials
+
+- Use `.env.example` as a template for required environment variables
+
+- Ensure PostgreSQL is running before starting the backend
+
+- For production deployment, build both frontend and backend:
+
+```bash
+# Backend
+cd backend && yarn build
+
+# Frontend
+cd frontend && yarn build
+```
+
+### Project Structure
+
+```bash
+.
+├── backend
+│   ├── docker-compose.yml
+│   ├── Dockerfile
+│   ├── Jenkinsfile
+│   ├── package.json
+│   ├── README.md
+│   ├── run.sh
+│   ├── src
+│   │   ├── config
+│   │   │   └── env.ts
+│   │   ├── controller
+│   │   │   └── flight
+│   │   │       └── index.ts
+│   │   ├── index.ts
+│   │   ├── middleware
+│   │   │   └── error.ts
+│   │   ├── routes
+│   │   │   ├── flight
+│   │   │   │   └── index.ts
+│   │   │   └── index.ts
+│   │   ├── service
+│   │   │   ├── api.ts
+│   │   │   └── flight
+│   │   │       └── index.ts
+│   │   └── util
+│   │       ├── error.ts
+│   │       └── logger.ts
+│   ├── tsconfig.json
+│   └── yarn.lock
+├── frontend
+│   ├── docker-compose.yml
+│   ├── Dockerfile
+│   ├── electron-builder.json
+│   ├── eslint.config.js
+│   ├── icon.png
+│   ├── index.html
+│   ├── Jenkinsfile
+│   ├── package.json
+│   ├── public
+│   │   ├── favicon.svg
+│   │   └── icons.svg
+│   ├── README.md
+│   ├── run.sh
+│   ├── src
+│   │   ├── app
+│   │   │   ├── App.scss
+│   │   │   ├── App.tsx
+│   │   │   ├── assets
+│   │   │   │   ├── flight-background.jpg
+│   │   │   │   ├── hero.png
+│   │   │   │   ├── plane.png
+│   │   │   │   ├── plane.svg
+│   │   │   │   ├── react.svg
+│   │   │   │   └── vite.svg
+│   │   │   ├── components
+│   │   │   │   ├── back-button
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   └── style.scss
+│   │   │   │   ├── current-position
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   └── style.scss
+│   │   │   │   ├── custom-marker
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── feature-card
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   └── style.scss
+│   │   │   │   ├── map
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   └── style.scss
+│   │   │   │   ├── map-theme-toggle
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   └── style.scss
+│   │   │   │   ├── plane-detail
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── plane-icon
+│   │   │   │   │   ├── index.tsx
+│   │   │   │   │   └── style.scss
+│   │   │   │   └── theme-button
+│   │   │   │       ├── index.tsx
+│   │   │   │       └── style.scss
+│   │   │   ├── interface
+│   │   │   │   └── index.ts
+│   │   │   ├── main.tsx
+│   │   │   ├── pages
+│   │   │   │   ├── flight
+│   │   │   │   │   └── index.tsx
+│   │   │   │   └── home
+│   │   │   │       ├── home.scss
+│   │   │   │       └── index.tsx
+│   │   │   └── store
+│   │   │       ├── index.ts
+│   │   │       └── slice
+│   │   │           ├── location.ts
+│   │   │           └── theme.ts
+│   │   └── electron
+│   │       ├── main.ts
+│   │       └── tsconfig.json
+│   ├── tsconfig.app.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   ├── vercel.json
+│   ├── vite.config.ts
+│   └── yarn.lock
+├── .github
+│   └── workflows
+│       └── ci.yml
+├── LICENSE
+├── preview
+│   └── readme.png
+└── README.md
+
+36 directories, 74 files
+```
+
+## Contact & Support
+
+For questions, issues, or contributions:
+
+- 📧 Email: [ammanrizwan00007@gmail.com]
 
 ## Preview
 

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setPosition } from "../../store/slice/location";
 import type { RefObject } from "react";
 import { GiPositionMarker } from "react-icons/gi";
+import { addBoundery } from "../../store/slice/boxlocation";
 
 const CurrentPosition = ({mapRef}: {mapRef: RefObject<L.Map | null>}) => {
 
@@ -16,6 +17,15 @@ const CurrentPosition = ({mapRef}: {mapRef: RefObject<L.Map | null>}) => {
                     const { lat, lng } = e.latlng;
                     dispatch(setPosition([lat, lng]));
                     mapRef.current?.flyTo([lat, lng], 14, { duration: 6 });
+                    const latlng = e.latlng;
+
+                    const bound = latlng.toBounds(1500);
+                    const bboxArray = [
+                        [bound.getSouthWest().lat, bound.getSouthWest().lng],
+                        [bound.getNorthEast().lat, bound.getNorthEast().lng],
+                    ];
+
+                    dispatch(addBoundery(bboxArray));
                 })
                 mapRef.current.once("locationerror", () => {
                     alert("Location Access denied.");

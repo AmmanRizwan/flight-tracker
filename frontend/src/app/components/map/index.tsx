@@ -1,4 +1,4 @@
-import { MapContainer, Marker, Popup, TileLayer, Tooltip } from 'react-leaflet';
+import { MapContainer, Marker, Popup, Rectangle, TileLayer, Tooltip } from 'react-leaflet';
 import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
 import './style.scss';
@@ -19,6 +19,7 @@ const Map = () => {
     const ATTR = import.meta.env.VITE_MAP_ATTRI;
     const API = import.meta.env.VITE_API_URL as string;
     const { theme } = useSelector((state: RootState) => state.theme);
+    const { bound } = useSelector((state: RootState) => state.boxing);
 
     const mapRef = useRef<L.Map | null>(null);
     const [flight, setFlight] = useState([]);
@@ -70,6 +71,15 @@ const Map = () => {
                     Your are here Location
                 </Popup>
             </Marker>
+            {
+                bound === null ? ( null ) : (
+                    <Rectangle
+                        bounds={bound}
+                        pathOptions={{ color: "black" }}
+                    >
+                    </Rectangle>
+                )
+            }
             {
                 flight && flight.slice(0, 100).map((plane, index) => {
                     const lat = plane[6];

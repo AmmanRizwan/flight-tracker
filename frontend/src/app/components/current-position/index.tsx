@@ -36,7 +36,6 @@ const CurrentPosition = ({mapRef}: {mapRef: RefObject<L.Map | null>}) => {
         catch (err) {
             console.error(err);
         }
-        
     }
 
     return (

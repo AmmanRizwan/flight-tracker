@@ -1,0 +1,26 @@
+.map-switch-btn {
+    border: none;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom: 100px;
+    right: 20px;
+    background-color: white;
+    z-index: 2000;
+    padding: 10px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    
+    &:hover {
+        background-color: #e2e2e2;
+    }
+}
+
+@media (max-width: 567px) {
+    .map-switch-btn {
+        width: 40px;
+        height: 40px;
+    }
+}
